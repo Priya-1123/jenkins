@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the docker version configured as "27.0.3" and add it to the path.
+        docker "27.0.3"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/Priya-1123/jenkins.git'
+
+                // Run docker on a Unix agent.
+                sh "docker.test.failure.ignore=true clean package"
+
+                // To run docker on a Windows agent, use
+                // bat "docker.test.failure.ignore=true clean package"
+            }
+
+            post {
+                // If docker was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
+        }
+    }
+}
