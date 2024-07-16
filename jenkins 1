@@ -1,16 +1,18 @@
 pipeline {
+    
     agent any
-    environment{
-        Release="27.0.3"
+    environment {
+        RELEASE='20.04'
     }
-    stages {
-        stage('build') {
-            agent any
-    environment{
-        LOG_LEVEL='27.0.3'
-        }
 
-         steps {
+    stages {
+
+        stage('Build') {
+            agent any
+            environment {
+                LOG_LEVEL='INFO'
+            }
+            steps {
                 echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
             }
         }
