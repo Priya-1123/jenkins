@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    environment{
+        Release="27.0.3"
+    }
+    stages {
+        stage('build') {
+            agent any
+    environment{
+        LOG_LEVEL='27.0.3'
+        }
+
+         steps {
+                echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Testing. I can see release ${RELEASE}, but not log level ${LOG_LEVEL}"
+            }
+        }
+    }
+}
+
+    
