@@ -12,13 +12,11 @@ pipeline {
                 // Get some code from a GitHub repository
                 git 'https://github.com/Priya-1123/jenkins.git'
 
-                // Run docker on a Unix agent.
-                sh "docker.test.failure.ignore=true clean package"
-
-                // To run docker on a Windows agent, use
-                // bat "docker.test.failure.ignore=true clean package"
+                // To run docker
+                // sh "apt get update"
             }
-
+                 {
+                    sh "apt get install docker"
             post {
                 // If docker was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
