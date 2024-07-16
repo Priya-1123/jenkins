@@ -38,16 +38,7 @@ pipeline {
                 sh 'echo "In Test Step"'
             }
         }
-        stage('install') {
-            steps {
-                // update your application to a target environment (e.g., staging, production)
-                sh 'apt get update "update"'
-            }
-             steps {
-                // install your application to a target environment (e.g., staging, production)
-                sh 'apt get install docker "docker"'
-            }
-        }
+    
         stage('Deploy') {
             steps {
                 // Deploy your application to a target environment (e.g., staging, production)
